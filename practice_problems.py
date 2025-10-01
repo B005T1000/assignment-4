@@ -30,23 +30,20 @@ task_queue.add_task("Code review")
 task_queue.remove_oldest_task() → "Email follow-up"
 """
 
-from collections import deque
-
 class TaskQueue:
     def __init__(self):
-        # A deque is the best choice because it supports O(1) append at the back 
-        # and O(1) pops from the front, unlike lists which are O(n) for front removal.
-        self.queue = deque()
+        self.queue = []  # use a normal list
 
     def add_task(self, task):
-        # Append to the right side in O(1).
+        # append at the end → O(1)
         self.queue.append(task)
 
     def remove_oldest_task(self):
-        # Pop from the left side in O(1).
+        # remove from the front → O(n), because all elements get shifted
         if self.queue:
-            return self.queue.popleft()
+            return self.queue.pop(0)
         return None
+
 
 
 """
